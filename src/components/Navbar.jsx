@@ -13,16 +13,16 @@ const Navbar = () => {
 
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center space-x-8">
-            <a href="#home" className="hover:bg-blue-400 transition">
+            <a href="#home" className="hover:text-blue-500 transition">
               Home
             </a>
-            <a href="#projects" className="hover:text-primary transition">
+            <a href="#projects" className="hover:text-blue-500 transition">
               Projects
             </a>
-            <a href="#skills" className="hover:text-primary transition">
+            <a href="#skills" className="hover:text-blue-500 transition">
               Skills
             </a>
-            <a href="#contact" className="hover:text-primary transition">
+            <a href="#contact" className="hover:text-blue-500 transition">
               Contact
             </a>
           </div>
