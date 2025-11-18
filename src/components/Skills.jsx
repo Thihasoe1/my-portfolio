@@ -1,10 +1,10 @@
 const skills = [
+  { name: "Dart", level: 80 },
+  { name: "Flutter", level: 90 },
   { name: "JavaScript", level: 90 },
   { name: "React", level: 85 },
   { name: "TypeScript", level: 80 },
   { name: "Node.js", level: 75 },
-  { name: "UI/UX Design", level: 70 },
-  { name: "Responsive Design", level: 95 },
 ];
 
 const Skills = () => {
@@ -21,7 +21,7 @@ const Skills = () => {
               </div>
               <div className="h-3 bg-gray-200 rounded-full">
                 <div
-                  className="h-3 bg-primary rounded-full"
+                  className="h-3 bg-blue-500 rounded-full"
                   style={{ width: `${skill.level}%` }}
                 ></div>
               </div>

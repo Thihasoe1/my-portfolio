@@ -7,3 +7,31 @@ body {
 .scroll-smooth {
   scroll-behavior: smooth;
 }
+
+.typewriter {
+  overflow: hidden;
+  border-right: 0.16em solid #5a64d1;
+  white-space: nowrap;
+  width: 0;
+  animation: typing 3s steps(20, end) forwards,
+    blink-caret 0.75s step-end infinite;
+}
+
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 22ch;
+  }
+}
+
+@keyframes blink-caret {
+  from,
+  to {
+    border-color: transparent;
+  }
+  50% {
+    border-color: #4343fe;
+  }
+}

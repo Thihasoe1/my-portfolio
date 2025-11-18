@@ -13,8 +13,12 @@ const Navbar = () => {
 
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center space-x-8">
-            <a href="#home" className="hover:text-blue-500 transition">
-              Home
+            <a
+              href="#home"
+              className="relative text-gray/80 transition duration-300 hover:text-blue-500 group"
+            >
+              <span>Home</span>
+              <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-blue-500 transition-all duration-300 group-hover:w-full"></span>
             </a>
             <a href="#projects" className="hover:text-blue-500 transition">
               Projects
