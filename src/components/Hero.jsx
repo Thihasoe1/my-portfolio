@@ -46,7 +46,7 @@ const Hero = () => {
           >
             <motion.h1
               variants={item}
-              className="text-4xl md:text-6xl font-bold leading-tight"
+              className="text-4xl md:text-5xl font-bold leading-tight"
             >
               Hi, I'm <span className="text-blue-500">Saw Thi Ha Soe</span>
             </motion.h1>
@@ -62,8 +62,7 @@ const Hero = () => {
               variants={item}
               className="text-lg text-gray-700 max-w-lg"
             >
-              I design beautiful, responsive mobile applications with modern
-              technologies and a relentless focus on user experience.
+              I’m a Mobile Application Developer obsessed with crafting beautiful, intuitive, and high-performance mobile experiences. With a relentless focus on user experience, I transform ideas into seamless apps that people love to use — not just they work, but because they feel right.
             </motion.p>
 
             <motion.div variants={item} className="flex flex-wrap gap-4 pt-4">
@@ -113,7 +112,3 @@ const Hero = () => {
 };
 
 export default Hero;
-
-{
-  /* <div className="bg-gray-200 border-2 border-dashed rounded-xl w-48 h-48 md:w-64 md:h-64" /> */
-}

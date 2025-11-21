@@ -13,17 +13,24 @@ const projects = [
     id: 2,
     title: "StrategyFirst Learn",
     description:
-      "Productivity tool with drag-and-drop interface and team collaboration",
-    tech: ["Vue.js", "Firebase", "Tailwind CSS"],
+      "Strategy First International College is a top private college in Yangon and Mandalay, Myanmar, offering MBA programs, bachelor’s degrees in business and IT, and certificate and professional diploma programs for Myanmar students.",
+    tech: ["Dart", "Firebase", "Flutter", "REST API"],
     image: "/src/assets/strategy_first.png",
   },
   {
     id: 3,
-    title: "StrategyFirst Extension",
-    description: "Real-time weather forecasting with location-based services",
-    tech: ["React", "OpenWeather API", "Chart.js"],
+    title: "StrategyFirst Extension (SFUx)",
+    description: "SFUx is an online learning application founded in Myanmar. We offer certified programs in key areas such as business management, human resources, operations management, technology, and digital marketing. Our courses are designed to equip students with the skills necessary for success in the modern business world.",
+    tech: ["Dart", "Flutter", "Firebase", "REST API"],
     image: "/src/assets/sfux.png",
   },
+  {
+    id: 4,
+    title: "Personal Portfolio Website",
+    description:"Putet Comics is one of the largest publishers of Myanmar comics, featuring a wide variety of characters including Tutpi, Poe Zar, Shwe Ei Shwe Boat, Jouk Jack and many many more. With Putet Comics App, you can download and enjoy great comics from our current weekly journals plus our vast classics library. You can also download the Buddhist comics for free.",
+    tech: ["Dart", "Flutter", "Firebase", "REST API"],
+    image: "/src/assets/putet.png",
+  }
 ];
 
 const Projects = () => {
