@@ -62,7 +62,7 @@ const Hero = () => {
               variants={item}
               className="text-lg text-gray-700 max-w-lg"
             >
-              I’m a Mobile Application Developer obsessed with crafting beautiful, intuitive, and high-performance mobile experiences. With a relentless focus on user experience, I transform ideas into seamless apps that people love to use — not just they work, but because they feel right.
+              Mobile Application Developer with 3+ years of experience building scalable, high-performance mobile applications for finance, education, and real estate sectors.
             </motion.p>
 
             <motion.div variants={item} className="flex flex-wrap gap-4 pt-4">

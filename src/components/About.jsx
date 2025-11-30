@@ -25,38 +25,36 @@ const AboutPage = () => {
   const experiences = [
     {
       id: 1,
-      role: 'Senior Frontend Developer',
-      company: 'Tech Innovations Inc.',
-      period: 'Jan 2022 - Present',
-      description: 'Lead development of responsive web applications using React, TypeScript, and modern CSS frameworks.',
+      role: 'Senior Flutter Developer',
+      company: 'Strategy First Education Group',
+      period: 'May 2024 - Present',
+      description: ' Designed, developed, and maintained a suite of educational mobile applications targeting diverse learning needs, achieving over 100,000 combined downloads across iOS and Android platforms. Architected apps using Clean Architecture principles and rigorously applied Test-Driven Development (TDD) to maximize code quality, test coverage (>85%), and long-term scalability.',
       achievements: [
-        'Improved application performance by 40%',
-        'Mentored 5 junior developers',
-        'Implemented CI/CD pipelines'
+        'Integrated advanced offline-first capabilities with Hive + Firebase caching strategies, allowing uninterrupted learning during low-connectivity scenarios—critical for users in rural/underserved regions.',
+        'Designed & implemented a modular feature-flag system (using Firebase Remote Config)',
+        'Reduced crash rate by 70% (from 3.2% → 0.9%) via proactive Firebase Crashlytics monitoring, structured error logging, and systematic technical debt refactoring sprints.',
       ]
     },
     {
       id: 2,
-      role: 'Frontend Developer',
-      company: 'Digital Solutions LLC',
-      period: 'Mar 2020 - Dec 2021',
-      description: 'Developed user interfaces for client projects using React ecosystem.',
+      role: 'Junior Mobile Developer',
+      company: 'Spectrum Soft Technology - (Remote)',
+      period: 'July 2023 - Feb 2024',
+      description: 'Developed secure banking authentication features using Flutter, Firebase Auth, and Navis SDK with role-based access control. Improved app load performance by 25% through Riverpod-based state management and widget optimization. Integrated RESTful APIs and collaborated with backend teams to reduce UI-related bugs by 20%. Followed Clean Architecture principles with full test coverage (unit & integration).',
       achievements: [
-        'Delivered 10+ client projects on time',
-        'Reduced bundle size by 30%',
-        'Implemented design system'
+        'Improved app startup time by 25% by optimizing widget rebuilds and migrating legacy state logic to Riverpod, under mentorship.',
+        'Reduced UI-related production bugs by 20% by proactively writing integration tests and collaborating with backend/QA teams on API contract validation.',
       ]
     },
     {
       id: 3,
-      role: 'Web Developer',
-      company: 'StartUp Ventures',
-      period: 'Jun 2018 - Feb 2020',
-      description: 'Created responsive websites and web applications for early-stage startups.',
+      role: 'Junior Mobile Developer',
+      company: 'Amicus Realty & Service Center',
+      period: 'June 2022 - June 2023',
+      description: 'Built cross-platform mobile apps for real estate clients using Flutter, Dart, and GetX. Integrated Google Maps SDK to display dynamic property markers, enhancing user navigation and engagement. Implemented GraphQL for efficient data fetching and real-time updates. Collaborated with designers and backend engineers in agile sprints to deliver scalable features.',
       achievements: [
-        'Built MVPs for 5 startups',
-        'Achieved 95%+ performance scores',
-        'Integrated with multiple APIs'
+        'Implemented Google Maps with custom clustering for 500+ markers — reduced map lag complaints by 75%.',
+        'Optimized GraphQL queries → 40% smaller payloads, 1.2s faster load times on mid-tier devices.',
       ]
     }
   ];
@@ -101,7 +99,7 @@ const AboutPage = () => {
                       <h3 className="text-xl font-bold text-gray-800">{exp.role}</h3>
                       <p className="text-blue-500 font-medium">{exp.company}</p>
                     </div>
-                    <span className="inline-block bg-indigo-100 text-blue-800 text-sm font-medium px-3 py-1 rounded-full">
+                    <span className="inline-block bg-indigo-100 text-blue-800 text-sm font-medium px-3 py-1 rounded-full w-fit">
                       {exp.period}
                     </span>
                   </div>
@@ -156,7 +154,7 @@ const AboutPage = () => {
               initial="hidden"
               animate="show"
             >
-              {['React', 'TypeScript', 'Tailwind CSS', 'Next.js', 'Redux', 'GraphQL', 'Jest', 'Node.js'].map((skill, idx) => (
+              {['Dart', 'Flutter','Express.js', 'Node.js', 'GraphQL','Firebase','Hive', 'React.js'].map((skill, idx) => (
                 <motion.div 
                   key={idx} 
                   className="bg-gray-50 p-4 rounded-lg text-center transition-transform duration-300 hover:scale-105"
@@ -171,7 +169,7 @@ const AboutPage = () => {
         </motion.section>
 
         {/* Contact CTA */}
-        <motion.section 
+        {/* <motion.section 
           className="text-center"
           variants={container}
           initial="hidden"
@@ -184,7 +182,7 @@ const AboutPage = () => {
           >
             Get In Touch
           </motion.button>
-        </motion.section>
+        </motion.section> */}
       </div>
     </section>
   );

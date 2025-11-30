@@ -1,10 +1,10 @@
 const skills = [
   { name: "Dart", level: 80 },
   { name: "Flutter", level: 90 },
-  { name: "JavaScript", level: 90 },
-  { name: "React", level: 85 },
-  { name: "TypeScript", level: 80 },
-  { name: "Node.js", level: 75 },
+  { name: "JavaScript", level: 60 },
+  { name: "React", level: 50 },
+  { name: "TypeScript", level: 50 },
+  { name: "Node.js", level: 50 },
 ];
 
 const Skills = () => {
