@@ -1,4 +1,8 @@
 import { motion } from "framer-motion";
+import wasolearn from "@/assets/waso_learn.webp";
+import sfulearn from "@/assets/strategy_first.png";
+import sfux from "@/assets/sfux.png";
+import putet from "@/assets/putet.png";
 
 const projects = [
   {
@@ -7,7 +11,7 @@ const projects = [
     description:
       "Waso Learn is a mobile-first learning application designed to bridge educational gaps for Basic Education High School students across Myanmar. As a flagship social business of Strategy First Education Group, Waso Learn delivers curriculum-aligned digital lessons for students from Kindergarten through Grade 12, ensuring equitable access to quality education—especially in underserved and remote communities. Built with offline-first functionality and low-data optimization, the platform enables students to download and study core subjects—including Myanmar Language, English, Mathematics, Science, and Social Studies—even without consistent internet connectivity. The app supports self-paced learning, interactive quizzes, progress tracking, and teacher-approved content aligned with the national curriculum.",
     tech: ["Dart", "Flutter", "Firebase", "Backend API"],
-    image: "/src/assets/waso_learn.webp",
+    image: `${wasolearn}`,
   },
   {
     id: 2,
@@ -15,22 +19,24 @@ const projects = [
     description:
       "Strategy First International College is a top private college in Yangon and Mandalay, Myanmar, offering MBA programs, bachelor’s degrees in business and IT, and certificate and professional diploma programs for Myanmar students.",
     tech: ["Dart", "Firebase", "Flutter", "REST API"],
-    image: "/src/assets/strategy_first.png",
+    image: `${sfulearn}`,
   },
   {
     id: 3,
     title: "StrategyFirst Extension (SFUx)",
-    description: "SFUx is an online learning application founded in Myanmar. We offer certified programs in key areas such as business management, human resources, operations management, technology, and digital marketing. Our courses are designed to equip students with the skills necessary for success in the modern business world.",
+    description:
+      "SFUx is an online learning application founded in Myanmar. We offer certified programs in key areas such as business management, human resources, operations management, technology, and digital marketing. Our courses are designed to equip students with the skills necessary for success in the modern business world.",
     tech: ["Dart", "Flutter", "Firebase", "REST API"],
-    image: "/src/assets/sfux.png",
+    image: `${sfux}`,
   },
   {
     id: 4,
     title: "Personal Portfolio Website",
-    description:"Putet Comics is one of the largest publishers of Myanmar comics, featuring a wide variety of characters including Tutpi, Poe Zar, Shwe Ei Shwe Boat, Jouk Jack and many many more. With Putet Comics App, you can download and enjoy great comics from our current weekly journals plus our vast classics library. You can also download the Buddhist comics for free.",
+    description:
+      "Putet Comics is one of the largest publishers of Myanmar comics, featuring a wide variety of characters including Tutpi, Poe Zar, Shwe Ei Shwe Boat, Jouk Jack and many many more. With Putet Comics App, you can download and enjoy great comics from our current weekly journals plus our vast classics library. You can also download the Buddhist comics for free.",
     tech: ["Dart", "Flutter", "Firebase", "REST API"],
-    image: "/src/assets/putet.png",
-  }
+    image: `${putet}`,
+  },
 ];
 
 const Projects = () => {

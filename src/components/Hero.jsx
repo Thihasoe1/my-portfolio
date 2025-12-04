@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import profileImage from "@/assets/ths.jpeg";
 
 const Hero = () => {
   // Animation variants
@@ -62,7 +63,9 @@ const Hero = () => {
               variants={item}
               className="text-lg text-gray-700 max-w-lg"
             >
-              Mobile Application Developer with 3+ years of experience building scalable, high-performance mobile applications for finance, education, and real estate sectors.
+              Mobile Application Developer with 3+ years of experience building
+              scalable, high-performance mobile applications for finance,
+              education, and real estate sectors.
             </motion.p>
 
             <motion.div variants={item} className="flex flex-wrap gap-4 pt-4">
@@ -99,7 +102,7 @@ const Hero = () => {
               animate="animate"
             >
               <img
-                src="/src/assets/ths.jpeg" // Replace with your image path
+                src={profileImage}
                 alt="profile image"
                 className="w-full h-full object-cover rounded-full"
               />
