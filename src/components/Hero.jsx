@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import profileImage from "@/assets/ths.jpeg";
 
 const Hero = () => {
   // Animation variants
@@ -44,11 +45,14 @@ const Hero = () => {
             initial="hidden"
             animate="show"
           >
+            <motion.p variants={item} className="text-lg text-gray-700 bg-blue-300/30 inline-block px-3 py-1 rounded-full">
+              Hello,
+            </motion.p>
             <motion.h1
               variants={item}
               className="text-4xl md:text-5xl font-bold leading-tight"
             >
-              Hi, I'm <span className="text-blue-500">Saw Thi Ha Soe</span>
+              I'm <span className="text-blue-500">Saw Thi Ha Soe</span>
             </motion.h1>
 
             <motion.h2
@@ -99,7 +103,7 @@ const Hero = () => {
               animate="animate"
             >
               <img
-                src="/src/assets/ths.jpeg" // Replace with your image path
+                src={profileImage}
                 alt="profile image"
                 className="w-full h-full object-cover rounded-full"
               />

@@ -31,12 +31,16 @@ const Contact = () => {
                 placeholder="Your message here..."
               ></textarea>
             </div>
-            <button
-              type="submit"
-              className="bg-primary text-white px-8 py-3 rounded-lg hover:bg-blue-700 transition w-full md:w-auto"
-            >
-              Send Message
-            </button>
+
+            {/* Added additional Send Message button */}
+            <div className="flex flex-col md:flex-row gap-4">
+              <button
+                type="submit"
+                className="bg-blue-500 text-white cursor-pointer px-8 py-3 rounded-lg hover:bg-blue-600 transition w-full md:w-auto"
+              >
+                Send Message
+              </button>
+            </div>
           </form>
         </div>
       </div>
