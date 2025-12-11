@@ -29,7 +29,8 @@ const projects = [
   {
     id: 3,
     title: "StrategyFirst Extension (SFUx)",
-    description: "SFUx is an online learning application founded in Myanmar. We offer certified programs in key areas such as business management, human resources, operations management, technology, and digital marketing. Our courses are designed to equip students with the skills necessary for success in the modern business world.",
+    description:
+      "SFUx is an online learning application founded in Myanmar. We offer certified programs in key areas such as business management, human resources, operations management, technology, and digital marketing. Our courses are designed to equip students with the skills necessary for success in the modern business world.",
     tech: ["Dart", "Flutter", "Firebase", "REST API"],
     image: `${sfux}`,
     iosLink: "https://apps.apple.com/th/app/sfux/id1506353798",

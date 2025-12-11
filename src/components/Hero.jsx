@@ -66,7 +66,9 @@ const Hero = () => {
               variants={item}
               className="text-lg text-gray-700 max-w-lg"
             >
-              Mobile Application Developer with 3+ years of experience building scalable, high-performance mobile applications for finance, education, and real estate sectors.
+              Mobile Application Developer with 3+ years of experience building
+              scalable, high-performance mobile applications for finance,
+              education, and real estate sectors.
             </motion.p>
 
             <motion.div variants={item} className="flex flex-wrap gap-4 pt-4">
