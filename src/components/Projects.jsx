@@ -10,45 +10,49 @@ const projects = [
     id: 1,
     title: "Waso Learn KG-12",
     description:
-      "Waso Learn is a mobile-first learning application designed to bridge educational gaps for Basic Education High School students across Myanmar. As a flagship social business of Strategy First Education Group, Waso Learn delivers curriculum-aligned digital lessons for students from Kindergarten through Grade 12, ensuring equitable access to quality education—especially in underserved and remote communities. Built with offline-first functionality and low-data optimization, the platform enables students to download and study core subjects—including Myanmar Language, English, Mathematics, Science, and Social Studies—even without consistent internet connectivity. The app supports self-paced learning, interactive quizzes, progress tracking, and teacher-approved content aligned with the national curriculum.",
+      "A mobile-first learning app bridging educational gaps for BEHS students across Myanmar. Features offline-first functionality, low-data optimization, and interactive quizzes for K-12 students.",
     tech: ["Dart", "Flutter", "Firebase", "Backend API"],
-    image: `${wasolearn}`,
+    image: wasolearn,
     iosLink: "https://apps.apple.com/th/app/waso-learn-kg-12/id1531073432",
     androidLink: "https://play.google.com/store/apps/details?id=com.sfu.waso_learn&pcampaignid=web_share",
+    color: "from-blue-500 to-indigo-600",
   },
   {
     id: 2,
     title: "StrategyFirst Learn",
     description:
-      "Strategy First International College is a top private college in Yangon and Mandalay, Myanmar, offering MBA programs, bachelor’s degrees in business and IT, and certificate and professional diploma programs for Myanmar students.",
+      "A premium educational platform for Strategy First International College (Myanmar), providing mobile access to MBA programs, business degrees, and professional diplomas.",
     tech: ["Dart", "Firebase", "Flutter", "REST API"],
-    image: `${sfulearn}`,
+    image: sfulearn,
     iosLink: "https://apps.apple.com/us/app/strategyfirst-learn/id6444846287",
     androidLink: "https://play.google.com/store/apps/details?id=com.sfu.studentapp&pcampaignid=web_share",
+    color: "from-emerald-500 to-teal-600",
   },
   {
     id: 3,
-    title: "StrategyFirst Extension (SFUx)",
+    title: "StrategyFirst Extension",
     description:
-      "SFUx is an online learning application founded in Myanmar. We offer certified programs in key areas such as business management, human resources, operations management, technology, and digital marketing. Our courses are designed to equip students with the skills necessary for success in the modern business world.",
+      "SFUx is an online learning application offering certified programs in modern business management, digital marketing, and tech, optimized for seamless video streaming.",
     tech: ["Dart", "Flutter", "Firebase", "REST API"],
-    image: `${sfux}`,
+    image: sfux,
     iosLink: "https://apps.apple.com/th/app/sfux/id1506353798",
     androidLink: "https://play.google.com/store/apps/details?id=com.edu.sfuxlearn&pcampaignid=web_share",
+    color: "from-purple-500 to-pink-600",
   },
   {
     id: 4,
-    title: "Personal Portfolio Website",
-    description: "Putet Comics is one of the largest publishers of Myanmar comics, featuring a wide variety of characters including Tutpi, Poe Zar, Shwe Ei Shwe Boat, Jouk Jack and many many more. With Putet Comics App, you can download and enjoy great comics from our current weekly journals plus our vast classics library. You can also download the Buddhist comics for free.",
+    title: "Putet Comics",
+    description:
+      "A digital comic reader for Myanmar's largest comic publisher. Features a vast library of classics, modern releases, and offline downloading capabilities.",
     tech: ["Dart", "Flutter", "Firebase", "REST API"],
-    image: `${putet}`,
+    image: putet,
     iosLink: "https://apps.apple.com/us/app/putet-comics-2-0/id1559173511",
     androidLink: "https://play.google.com/store/apps/details?id=com.putet.comic&pcampaignid=web_share",
+    color: "from-orange-500 to-red-600",
   }
 ];
 
 const Projects = () => {
-  // Animation for the container
   const container = {
     hidden: { opacity: 0 },
     show: {
@@ -60,39 +64,42 @@ const Projects = () => {
     },
   };
 
-  // Animation for each project card
   const item = {
     hidden: {
       opacity: 0,
-      y: 30,
-      scale: 0.95,
+      y: 40,
     },
     show: {
       opacity: 1,
       y: 0,
-      scale: 1,
       transition: {
-        duration: 0.5,
-        ease: "easeOut",
+        duration: 0.7,
+        ease: [0.21, 0.47, 0.32, 0.98],
       },
     },
   };
 
   return (
-    <section id="projects" className="py-20 bg-gray-50">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.h2
-          className="text-3xl font-bold text-center mb-16"
+    <section id="projects" className="py-24 relative z-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <motion.div
+          className="text-center mb-20"
           initial={{ opacity: 0, y: -20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.6 }}
         >
-          My Projects
-        </motion.h2>
+          <h2 className="text-sm font-bold tracking-widest text-brand-400 uppercase mb-3">
+            Portfolio
+          </h2>
+          <h3 className="text-3xl md:text-5xl font-bold text-white">
+            Featured Projects
+          </h3>
+        </motion.div>
 
         <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5"
+          className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12"
           variants={container}
           initial="hidden"
           whileInView="show"
@@ -102,87 +109,79 @@ const Projects = () => {
             <motion.div
               key={project.id}
               variants={item}
-              whileHover={{
-                y: 0,
-                transition: { duration: 0.3 },
-              }}
-              className="bg-white rounded-xl shadow-md overflow-hidden transition-shadow"
+              className="group relative h-full flex flex-col"
             >
-              <div className="h-48 bg-linear-to-r from-blue-600/10 to-blue-100 border-b border-gray-100">
-                <img
-                  src={project.image}
-                  alt="Description"
-                  className="w-full h-full object-cover"
-                />
-              </div>
-
-              <div className="p-6">
-                <h3 className="text-xl font-bold mb-2">{project.title}</h3>
-                <p className="line-clamp-2 text-gray-600 mb-4">
-                  {project.description}
-                </p>
-
-                {/* Buttons Section */}
-                <div className="flex gap-3 mt-6">
-                  <a
-                    href={project.iosLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex-1 text-center cursor-pointer bg-black text-white py-3 rounded-lg font-medium hover:bg-black/80 transition"
+              {/* Dynamic glowing shadow behind card */}
+              <div className={`absolute -inset-0.5 bg-gradient-to-br ${project.color} rounded-[2rem] blur opacity-20 group-hover:opacity-40 transition duration-500`} />
+              
+              <div className="relative h-full flex flex-col glass-card rounded-3xl overflow-hidden border border-slate-700/50 hover:border-slate-500/50 transition-colors duration-500 bg-slate-900/80">
+                
+                {/* Image Container with inner shadow */}
+                <div className="relative h-64 overflow-hidden bg-slate-950 p-6 flex items-center justify-center">
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900 to-transparent z-10 opacity-60" />
+                  <motion.div 
+                    className="relative z-0 w-full h-full rounded-xl overflow-hidden shadow-2xl"
+                    whileHover={{ scale: 1.05 }}
+                    transition={{ duration: 0.5 }}
                   >
-                    <FaApple className="inline-block mr-2 mb-1" size={18} />
-                    App Store
-                  </a>
+                    <img
+                      src={project.image}
+                      alt={project.title}
+                      className="w-full h-full object-cover rounded-xl"
+                    />
+                  </motion.div>
+                </div>
 
-                  <a
-                    href={project.androidLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex-1 cursor-pointer text-center bg-green-600 text-white py-3 rounded-lg font-medium hover:bg-green-700 transition"
-                  >
-                    <FaGooglePlay className="inline-block mr-2" size={16} />
-                    Google Play
-                  </a>
+                {/* Content */}
+                <div className="p-8 flex-1 flex flex-col">
+                  <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-brand-300 transition-colors">
+                    {project.title}
+                  </h3>
+                  
+                  <p className="text-slate-400 mb-6 flex-1 line-clamp-3 leading-relaxed">
+                    {project.description}
+                  </p>
+
+                  <div className="flex flex-wrap gap-2 mb-8 mt-auto">
+                    {project.tech.map((tech, idx) => (
+                      <span
+                        key={idx}
+                        className="text-xs font-mono px-3 py-1 rounded-full bg-slate-800 text-slate-300 border border-slate-700"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+
+                  {/* Buttons */}
+                  <div className="flex flex-col sm:flex-row gap-3 pt-6 border-t border-slate-800">
+                    {project.iosLink && (
+                      <a
+                        href={project.iosLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex-1 flex items-center justify-center gap-2 py-3 px-4 rounded-xl font-medium text-sm bg-white text-slate-900 hover:bg-slate-200 transition-colors"
+                      >
+                        <FaApple size={18} />
+                        App Store
+                      </a>
+                    )}
+                    
+                    {project.androidLink && (
+                      <a
+                        href={project.androidLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex-1 flex items-center justify-center gap-2 py-3 px-4 rounded-xl font-medium text-sm bg-gradient-to-r from-emerald-500 to-emerald-600 text-white hover:from-emerald-400 hover:to-emerald-500 transition-colors"
+                      >
+                        <FaGooglePlay size={16} />
+                        Google Play
+                      </a>
+                    )}
+                  </div>
                 </div>
               </div>
             </motion.div>
-
-            // <motion.div
-            //   key={project.id}
-            //   variants={item}
-            //   whileHover={{
-            //     y: -10,
-            //     transition: { duration: 0.3 },
-            //   }}
-            //   className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-shadow"
-            // >
-            //   <div className="h-48 bg-linear-to-r from-blue-600/10 to-blue-100 border-b border-gray-100">
-            //     <img
-            //       src={project.image}
-            //       alt="Description"
-            //       className="w-full h-full object-cover"
-            //     />
-            //   </div>
-            //   <div className="p-6">
-            //     <h3 className="text-xl font-bold mb-2">{project.title}</h3>
-            //     <p className="line-clamp-2 text-gray-600 mb-4">
-            //       {project.description}
-            //     </p>
-            //     {/* <div className="flex flex-wrap gap-2">
-            //       {project.tech.map((tech, idx) => (
-            //         <motion.span
-            //           key={idx}
-            //           initial={{ opacity: 0, scale: 0.8 }}
-            //           animate={{ opacity: 1, scale: 1 }}
-            //           transition={{ delay: 0.3 + idx * 0.1 }}
-            //           className="bg-blue-700/12 text-primary px-3 py-1 rounded-full text-sm"
-            //         >
-            //           {tech}
-            //         </motion.span>
-            //       ))}
-            //     </div> */}
-            //   </div>
-            // </motion.div>
           ))}
         </motion.div>
       </div>

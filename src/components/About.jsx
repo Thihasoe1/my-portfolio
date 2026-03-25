@@ -1,14 +1,52 @@
 import { motion } from "framer-motion";
 
+const experiences = [
+  {
+    id: 1,
+    role: "Senior Flutter Developer",
+    company: "Strategy First Education Group",
+    period: "May 2024 - Present",
+    description:
+      "Architected and maintained educational apps reaching 100k+ downloads. Applied Clean Architecture and TDD (>85% coverage). Integrated offline-first capabilities to support users in low-connectivity regions.",
+    achievements: [
+      "Built offline-first Hive + Firebase caching, ensuring uninterrupted learning.",
+      "Engineered modular feature-flag system via Firebase Remote Config.",
+      "Reduced crash rate by 70% using proactive Firebase Crashlytics monitoring.",
+    ],
+  },
+  {
+    id: 2,
+    role: "Junior Mobile Developer",
+    company: "Spectrum Soft Technology - (Remote)",
+    period: "July 2023 - Feb 2024",
+    description:
+      "Developed secure banking authentication features. Improved load performance using Riverpod state management. Integrated REST APIs and maintained full test coverage.",
+    achievements: [
+      "Optimized app startup time by 25% by migrating state logic to Riverpod.",
+      "Reduced UI-related production bugs by 20% by implementing rigorous integration tests.",
+    ],
+  },
+  {
+    id: 3,
+    role: "Junior Mobile Developer",
+    company: "Amicus Realty & Service Center",
+    period: "June 2022 - June 2023",
+    description:
+      "Built cross-platform real estate apps with interactive mapping and real-time updates using getX and GraphQL.",
+    achievements: [
+      "Implemented Google Maps clustering for 500+ markers, eliminating lag.",
+      "Optimized GraphQL queries, reducing payloads by 40% and cutting load times by 1.2s.",
+    ],
+  },
+];
+
 const AboutPage = () => {
-  // Animation variants
   const container = {
     hidden: { opacity: 0 },
     show: {
       opacity: 1,
       transition: {
         staggerChildren: 0.2,
-        delayChildren: 0.3,
       },
     },
   };
@@ -22,167 +60,97 @@ const AboutPage = () => {
     },
   };
 
-  const experiences = [
-    {
-      id: 1,
-      role: 'Senior Flutter Developer',
-      company: 'Strategy First Education Group',
-      period: 'May 2024 - Present',
-      description: ' Designed, developed, and maintained a suite of educational mobile applications targeting diverse learning needs, achieving over 100,000 combined downloads across iOS and Android platforms. Architected apps using Clean Architecture principles and rigorously applied Test-Driven Development (TDD) to maximize code quality, test coverage (>85%), and long-term scalability.',
-      achievements: [
-        'Integrated advanced offline-first capabilities with Hive + Firebase caching strategies, allowing uninterrupted learning during low-connectivity scenarios—critical for users in rural/underserved regions.',
-        'Designed & implemented a modular feature-flag system (using Firebase Remote Config)',
-        'Reduced crash rate by 70% (from 3.2% → 0.9%) via proactive Firebase Crashlytics monitoring, structured error logging, and systematic technical debt refactoring sprints.',
-      ]
-    },
-    {
-      id: 2,
-      role: 'Junior Mobile Developer',
-      company: 'Spectrum Soft Technology - (Remote)',
-      period: 'July 2023 - Feb 2024',
-      description: 'Developed secure banking authentication features using Flutter, Firebase Auth, and Navis SDK with role-based access control. Improved app load performance by 25% through Riverpod-based state management and widget optimization. Integrated RESTful APIs and collaborated with backend teams to reduce UI-related bugs by 20%. Followed Clean Architecture principles with full test coverage (unit & integration).',
-      achievements: [
-        'Improved app startup time by 25% by optimizing widget rebuilds and migrating legacy state logic to Riverpod, under mentorship.',
-        'Reduced UI-related production bugs by 20% by proactively writing integration tests and collaborating with backend/QA teams on API contract validation.',
-      ]
-    },
-    {
-      id: 3,
-      role: 'Junior Mobile Developer',
-      company: 'Amicus Realty & Service Center',
-      period: 'June 2022 - June 2023',
-      description: 'Built cross-platform mobile apps for real estate clients using Flutter, Dart, and GetX. Integrated Google Maps SDK to display dynamic property markers, enhancing user navigation and engagement. Implemented GraphQL for efficient data fetching and real-time updates. Collaborated with designers and backend engineers in agile sprints to deliver scalable features.',
-      achievements: [
-        'Implemented Google Maps with custom clustering for 500+ markers — reduced map lag complaints by 75%.',
-        'Optimized GraphQL queries → 40% smaller payloads, 1.2s faster load times on mid-tier devices.',
-      ]
-    }
-  ];
-
   return (
-    <section id='about' className="min-h-screen flex items-center pt-0">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-        {/* Header Section */}
-        <motion.header 
+    <section id="about" className="py-24 relative">
+      {/* Background elements */}
+      <div className="absolute left-0 top-1/4 w-96 h-96 bg-brand-900/20 rounded-full blur-[100px] pointer-events-none mix-blend-screen" />
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.6 }}
           className="text-center mb-16"
-          variants={container}
-          initial="hidden"
-          animate="show"
         >
-          <motion.h1 
-            variants={item}
-            className="text-2xl md:text-3xl font-bold text-gray-800 mb-4"
-          >
+          <h2 className="text-sm font-bold tracking-widest text-brand-400 uppercase mb-3">
+            Career Journey
+          </h2>
+          <h3 className="text-3xl md:text-5xl font-bold text-white">
             Working Experience
-          </motion.h1>
-        </motion.header>
+          </h3>
+        </motion.div>
 
-        {/* Experience Section */}
-        <motion.section 
-          className="mb-16"
+        <motion.div
           variants={container}
           initial="hidden"
-          animate="show"
+          whileInView="show"
+          viewport={{ once: true, margin: "-50px" }}
+          className="space-y-8"
         >
-          <motion.div variants={item} className="space-y-8">
-            {experiences.map((exp) => (
-              <motion.div 
-                key={exp.id} 
-                className="bg-white rounded-2xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl"
-                variants={item}
-                whileHover={{ y: -5 }}
-                transition={{ duration: 0.3 }}
-              >
-                <div className="p-6 md:p-8">
-                  <div className="flex flex-col md:flex-row md:justify-between md:items-start gap-4">
-                    <div>
-                      <h3 className="text-xl font-bold text-gray-800">{exp.role}</h3>
-                      <p className="text-blue-500 font-medium">{exp.company}</p>
+          {experiences.map((exp) => (
+            <motion.div
+              key={exp.id}
+              variants={item}
+              className="relative group pl-8 md:pl-0"
+            >
+              <div className="md:grid md:grid-cols-5 gap-8 items-start">
+                
+                {/* Timeline Line & Dot (Desktop & Mobile) */}
+                <div className="absolute left-0 top-0 bottom-0 w-px bg-slate-800 md:left-[19.5%] md:translate-x-[-0.5px] group-last:bottom-auto group-last:h-full">
+                  <div className="absolute top-2 -left-1.5 md:left-[-5.5px] w-3 h-3 rounded-full bg-slate-800 border-2 border-brand-500 group-hover:bg-brand-400 group-hover:shadow-[0_0_15px_rgba(99,102,241,0.6)] transition-all duration-300 z-10" />
+                </div>
+
+                {/* Period (Desktop Left Sidebar) */}
+                <div className="hidden md:block col-span-1 pt-1 text-right pr-4">
+                  <span className="text-sm font-mono text-slate-400 group-hover:text-brand-300 transition-colors">
+                    {exp.period}
+                  </span>
+                </div>
+
+                {/* Content Card */}
+                <div className="col-span-4 mt-1 md:mt-0 pb-12 group-last:pb-0">
+                  <div className="glass-card rounded-2xl p-6 md:p-8 transition-all duration-300 hover:-translate-y-1">
+                    <div className="md:hidden mb-3">
+                      <span className="text-xs font-mono px-2 py-1 rounded bg-brand-500/10 text-brand-300 border border-brand-500/20">
+                        {exp.period}
+                      </span>
                     </div>
-                    <span className="inline-block bg-indigo-100 text-blue-800 text-sm font-medium px-3 py-1 rounded-full w-fit">
-                      {exp.period}
-                    </span>
-                  </div>
-                  
-                  <p className="mt-4 text-gray-600">{exp.description}</p>
-                  
-                  <div className="mt-6">
-                    <h4 className="font-semibold text-gray-800 mb-2">Key Achievements:</h4>
-                    <ul className="space-y-2">
-                      {exp.achievements.map((achievement, idx) => (
-                        <motion.li 
-                          key={idx} 
-                          className="flex items-start"
-                          variants={item}
-                          whileHover={{ x: 5 }}
-                        >
-                          <svg className="h-5 w-5 text-green-500 mr-2 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                          </svg>
-                          <span className="text-gray-600">{achievement}</span>
-                        </motion.li>
-                      ))}
-                    </ul>
+                    
+                    <h4 className="text-xl md:text-2xl font-bold text-white mb-1 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-brand-300 group-hover:to-accent-300 transition-all duration-300">
+                      {exp.role}
+                    </h4>
+                    <p className="text-brand-400 font-medium mb-4">{exp.company}</p>
+                    
+                    <p className="text-slate-300 mb-6 leading-relaxed">
+                      {exp.description}
+                    </p>
+
+                    <div>
+                      <h5 className="text-sm font-semibold text-slate-200 mb-3 uppercase tracking-wider">
+                        Key Achievements
+                      </h5>
+                      <ul className="space-y-3">
+                        {exp.achievements.map((achievement, idx) => (
+                          <li key={idx} className="flex items-start text-slate-400 group/item">
+                            <span className="text-accent-400 mr-2 mt-1 opacity-70 group-hover/item:opacity-100 transition-opacity">
+                              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                              </svg>
+                            </span>
+                            <span className="leading-relaxed text-sm md:text-base group-hover/item:text-slate-300 transition-colors">
+                              {achievement}
+                            </span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
                   </div>
                 </div>
-              </motion.div>
-            ))}
-          </motion.div>
-        </motion.section>
-
-        {/* Skills Section */}
-        <motion.section 
-          className="mb-16"
-          variants={container}
-          initial="hidden"
-          animate="show"
-        >
-          <motion.h2 
-            variants={item}
-            className="text-3xl font-bold text-gray-800 mb-8 text-center"
-          >
-            Technical Skills
-          </motion.h2>
-          
-          <motion.div 
-            className="bg-white rounded-2xl shadow-lg p-6 md:p-8"
-            variants={item}
-          >
-            <motion.div 
-              className="grid grid-cols-2 md:grid-cols-4 gap-6"
-              variants={container}
-              initial="hidden"
-              animate="show"
-            >
-              {['Dart', 'Flutter','Express.js', 'Node.js', 'GraphQL','Firebase','Hive', 'React.js'].map((skill, idx) => (
-                <motion.div 
-                  key={idx} 
-                  className="bg-gray-50 p-4 rounded-lg text-center transition-transform duration-300 hover:scale-105"
-                  variants={item}
-                  whileHover={{ scale: 1.05, backgroundColor: "#f3f4f6" }}
-                >
-                  <div className="font-medium text-gray-800">{skill}</div>
-                </motion.div>
-              ))}
+              </div>
             </motion.div>
-          </motion.div>
-        </motion.section>
-
-        {/* Contact CTA */}
-        {/* <motion.section 
-          className="text-center"
-          variants={container}
-          initial="hidden"
-          animate="show"
-        >
-          <motion.button
-            className="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-8 rounded-full transition duration-300 transform hover:scale-105"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            Get In Touch
-          </motion.button>
-        </motion.section> */}
+          ))}
+        </motion.div>
       </div>
     </section>
   );
