@@ -23,7 +23,7 @@ export const profile = {
     "CI/CD",
   ],
   platforms: ["Android", "iOS", "Web"],
-  languages: ["Myanmar", "English"],
+  languages: ["Myanmar", "English", "Thai"],
   email: "sawthihasoe.mobiledev@gmail.com",
   resume: {
     // File verified present at public/resume.pdf. Set to false to hide the CTA.
