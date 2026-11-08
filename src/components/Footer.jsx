@@ -34,7 +34,7 @@ export default function Footer() {
                 <a href={link.href} target="_blank" rel="noopener noreferrer" className={linkClass}>
                   <Icon icon={icons[link.id]} size={18} />
                   {link.label}
-                  <span className="sr-only">(opens in a new tab)</span>
+                  <span className="sr-only"> (opens in a new tab)</span>
                 </a>
               </li>
             ))}

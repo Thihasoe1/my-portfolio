@@ -43,7 +43,6 @@ export const education = [
 
 /**
  * External profiles. `verified` marks links confirmed by the owner.
- * LinkedIn is provisional — confirm before production deployment.
  */
 export const socialLinks = [
   {
@@ -56,9 +55,9 @@ export const socialLinks = [
   {
     id: "linkedin",
     label: "LinkedIn",
-    handle: "saw-thi-ha-soe",
-    href: "https://www.linkedin.com/in/saw-thi-ha-soe-812834368",
-    verified: false, // TODO: confirm URL before production deployment
+    handle: "saw-thi-ha-soe-812834368",
+    href: "https://linkedin.com/in/saw-thi-ha-soe-812834368",
+    verified: true, // confirmed by owner (LinkedIn answers bots with HTTP 999)
   },
 ];
 

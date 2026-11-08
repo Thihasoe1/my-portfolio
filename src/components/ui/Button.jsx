@@ -73,7 +73,7 @@ export default function Button({
           className="transition-transform duration-150 ease-brutal group-hover/button:translate-x-0.5"
         />
       )}
-      {external && <span className="sr-only">(opens in a new tab)</span>}
+      {external && <span className="sr-only"> (opens in a new tab)</span>}
     </>
   );
 

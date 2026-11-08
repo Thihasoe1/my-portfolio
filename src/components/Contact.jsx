@@ -1,53 +1,56 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { Check, Copy, Mail } from "lucide-react";
+import { FaGithub, FaLinkedin } from "react-icons/fa";
 import Button from "@/components/ui/Button";
 import Card from "@/components/ui/Card";
 import Container from "@/components/ui/Container";
 import SectionHeader from "@/components/ui/SectionHeader";
+import { profile, socialLinks } from "@/data/profile";
 
-// Phase C: visual restyle only. The Web3Forms form and its submit logic are
-// unchanged until Phase D replaces this section with direct email contact.
-const field =
-  "w-full px-4 py-3.5 bg-surface text-ink placeholder:text-ink-subtle border-3 border-ink rounded-brutal-sm shadow-brutal-sm focus-visible:shadow-brutal-none";
+const socialIcons = { github: FaGithub, linkedin: FaLinkedin };
+const [emailUser, emailDomain] = profile.email.split("@");
 
-const Contact = () => {
-  const [result, setResult] = useState("");
-  const [isSubmitting, setIsSubmitting] = useState(false);
+/** Copy text with the async Clipboard API, falling back to execCommand. */
+async function copyText(text) {
+  if (window.isSecureContext && navigator.clipboard?.writeText) {
+    await navigator.clipboard.writeText(text);
+    return;
+  }
+  const textarea = document.createElement("textarea");
+  textarea.value = text;
+  textarea.setAttribute("readonly", "");
+  textarea.style.position = "fixed";
+  textarea.style.opacity = "0";
+  document.body.appendChild(textarea);
+  textarea.select();
+  const ok = document.execCommand("copy");
+  textarea.remove();
+  if (!ok) throw new Error("Copy command was rejected");
+}
 
-  const onSubmit = async (event) => {
-    event.preventDefault();
-    setIsSubmitting(true);
-    setResult("Sending...");
+const messages = {
+  idle: "",
+  copied: "Email address copied to clipboard.",
+  error: "Couldn't copy automatically. Please select the address above and copy it manually.",
+};
 
-    const formData = new FormData(event.target);
+export default function Contact() {
+  const [status, setStatus] = useState("idle"); // idle | copied | error
+  const resetTimer = useRef();
 
-    // Replace this with your Web3Forms Access Key
-    // Get one for free at: https://web3forms.com/
-    formData.append("access_key", import.meta.env.VITE_FORM_ACCESS_KEY);
+  useEffect(() => () => clearTimeout(resetTimer.current), []);
 
+  const handleCopy = async () => {
+    clearTimeout(resetTimer.current);
     try {
-      const response = await fetch("https://api.web3forms.com/submit", {
-        method: "POST",
-        body: formData
-      });
-
-      const data = await response.json();
-
-      if (data.success) {
-        setResult("Message Sent Successfully!");
-        event.target.reset();
-      } else {
-        console.log("Error", data);
-        setResult(data.message);
-      }
-    } catch (error) {
-      console.log(error);
-      setResult("Something went wrong!");
+      await copyText(profile.email);
+      setStatus("copied");
+      resetTimer.current = setTimeout(() => setStatus("idle"), 3000);
+    } catch {
+      setStatus("error");
+      resetTimer.current = setTimeout(() => setStatus("idle"), 8000);
     }
-
-    setIsSubmitting(false);
   };
-
-  const succeeded = result.includes("Successfully");
 
   return (
     <section id="contact" aria-labelledby="contact-title" className="py-20 sm:py-28 bg-lime/40">
@@ -57,43 +60,58 @@ const Contact = () => {
           eyebrow="Contact"
           tone="surface"
           align="center"
-          title="Let's build something together."
-          description="Currently open for new opportunities. Whether you have a question or just want to say hi, I'll try my best to get back to you!"
+          title="Let's talk."
+          description="Email is the best way to reach me about mobile and Flutter engineering roles, collaborations or a project you have in mind."
         />
 
-        <Card padding="lg" shadow="lg">
-          <form className="space-y-6" onSubmit={onSubmit}>
-            <input type="hidden" name="subject" value="New message from Portfolio!" />
+        <Card padding="lg" shadow="lg" className="text-center">
+          <p className="font-display text-sm font-bold uppercase tracking-wider text-ink-subtle">Email</p>
+          {/* <wbr> lets narrow screens wrap at "@" instead of mid-word. */}
+          <p className="mt-2 font-display text-[clamp(1.125rem,0.9rem+1.6vw,2rem)] font-bold [overflow-wrap:anywhere] select-all">
+            {emailUser}
+            <wbr />@{emailDomain}
+          </p>
 
-            <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-              <div className="space-y-2">
-                <label htmlFor="name" className="block font-display font-bold">Your name</label>
-                <input type="text" name="name" id="name" required autoComplete="name" className={field} placeholder="John Doe" />
-              </div>
-              <div className="space-y-2">
-                <label htmlFor="email" className="block font-display font-bold">Your email</label>
-                <input type="email" name="email" id="email" required autoComplete="email" className={field} placeholder="john@example.com" />
-              </div>
-            </div>
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:justify-center">
+            <Button href={`mailto:${profile.email}`} size="lg" leftIcon={Mail}>
+              Email Me
+            </Button>
+            <Button
+              size="lg"
+              variant="secondary"
+              leftIcon={status === "copied" ? Check : Copy}
+              onClick={handleCopy}
+              aria-describedby="copy-email-status"
+            >
+              {status === "copied" ? "Copied!" : "Copy Email"}
+            </Button>
+          </div>
 
-            <div className="space-y-2">
-              <label htmlFor="message" className="block font-display font-bold">Message</label>
-              <textarea rows="5" name="message" id="message" required className={`${field} resize-y`} placeholder="Hello, I'd like to talk about..." />
-            </div>
+          <p
+            id="copy-email-status"
+            role="status"
+            aria-live="polite"
+            className={`mt-4 min-h-6 text-sm font-semibold ${status === "error" ? "text-ink" : "text-ink-muted"}`}
+          >
+            {messages[status]}
+          </p>
 
-            <div className="flex flex-col items-center gap-4 pt-2 sm:flex-row sm:justify-between">
-              <p role="status" aria-live="polite" className={`text-sm font-semibold ${succeeded ? "text-ink" : "text-ink-muted"}`}>
-                {result}
-              </p>
-              <Button type="submit" size="lg" disabled={isSubmitting} className="w-full sm:w-auto">
-                {isSubmitting ? "Sending..." : "Send Message"}
-              </Button>
-            </div>
-          </form>
+          <div className="mt-6 pt-6 border-t-2 border-ink">
+            <p className="font-display text-sm font-bold uppercase tracking-wider text-ink-subtle">
+              Elsewhere
+            </p>
+            <ul className="mt-4 flex flex-col gap-3 sm:flex-row sm:justify-center">
+              {socialLinks.map((link) => (
+                <li key={link.id}>
+                  <Button href={link.href} external variant="lavender" leftIcon={socialIcons[link.id]} fullWidth>
+                    {link.label}
+                  </Button>
+                </li>
+              ))}
+            </ul>
+          </div>
         </Card>
       </Container>
     </section>
   );
-};
-
-export default Contact;
+}
