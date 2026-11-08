@@ -74,7 +74,7 @@ function CaseStudy({ project }) {
   );
 }
 
-function ProjectCard({ project, index }) {
+export function ProjectCard({ project, index }) {
   const titleId = `project-${project.id}-title`;
   const { appStore, googlePlay } = project.links;
 

@@ -73,7 +73,14 @@ export default function Button({
           className="transition-transform duration-150 ease-brutal group-hover/button:translate-x-0.5"
         />
       )}
-      {external && <span className="sr-only"> (opens in a new tab)</span>}
+      {/* The space is a sibling text node: accessible-name computation trims
+          text inside each element, so a space inside the span would be lost. */}
+      {external && (
+        <>
+          {" "}
+          <span className="sr-only">(opens in a new tab)</span>
+        </>
+      )}
     </>
   );
 

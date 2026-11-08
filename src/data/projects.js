@@ -1,8 +1,10 @@
 /**
  * Featured projects — kept to a small, curated set.
  *
- * Descriptions, tech stacks, screenshots and store links are carried over
- * unchanged from the previous portfolio; store links were checked (HTTP 200).
+ * Descriptions are factual summaries of each app's public App Store listing
+ * (all four are published by "SFUx Online"; reviewed 2026-11-08). Unverified
+ * superlatives and performance claims from the old portfolio were removed.
+ * Tech stacks, screenshots and store links are unchanged; links return HTTP 200.
  *
  * Optional fields, rendered only when present — fill them with verified
  * information only, never estimates:
@@ -33,7 +35,7 @@ export const projects = [
     id: "waso-learn",
     name: "Waso Learn KG-12",
     description:
-      "A mobile-first learning app bridging educational gaps for BEHS students across Myanmar. Features offline-first functionality, low-data optimization, and interactive quizzes for K-12 students.",
+      "A mobile learning app for Basic Education High School students in Myanmar, with lessons from kindergarten to Grade 12 that support curriculum studies.",
     tech: ["Dart", "Flutter", "Firebase", "Backend API"],
     image: screenshot(wasoLearn640, wasoLearn1200, 1200, 675),
     links: {
@@ -45,7 +47,7 @@ export const projects = [
     id: "strategyfirst-learn",
     name: "StrategyFirst Learn",
     description:
-      "A premium educational platform for Strategy First International College (Myanmar), providing mobile access to MBA programs, business degrees, and professional diplomas.",
+      "The student app for Strategy First International College in Myanmar, which offers MBA programmes, bachelor's degrees in business and IT, and certificate and diploma programmes.",
     tech: ["Dart", "Firebase", "Flutter", "REST API"],
     image: screenshot(strategyFirstLearn640, strategyFirstLearn1200, 1200, 821),
     links: {
@@ -58,7 +60,7 @@ export const projects = [
     name: "SFUx",
     subtitle: "StrategyFirst Extension",
     description:
-      "SFUx is an online learning application offering certified programs in modern business management, digital marketing, and tech, optimized for seamless video streaming.",
+      "An online learning app where learners attend virtual classes, work through course materials and take a quiz after each lesson, earning a digital certificate when they pass.",
     tech: ["Dart", "Flutter", "Firebase", "REST API"],
     image: screenshot(sfux640, sfux1200, 1200, 904),
     links: {
@@ -70,7 +72,7 @@ export const projects = [
     id: "putet-comics",
     name: "Putet Comics",
     description:
-      "A digital comic reader for Myanmar's largest comic publisher. Features a vast library of classics, modern releases, and offline downloading capabilities.",
+      "A comic reader for Putet Comics, a Myanmar comics publisher. Readers can download comics from current weekly journals and the classics catalogue, including free Buddhist comics.",
     tech: ["Dart", "Flutter", "Firebase", "REST API"],
     image: screenshot(putet640, putet1200, 1200, 904),
     links: {

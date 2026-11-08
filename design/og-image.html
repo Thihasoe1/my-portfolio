@@ -1,0 +1,87 @@
+<!doctype html>
+<!--
+  Source for public/og-image.png (1200x630 social preview).
+  Regenerate with local Chrome (no project dependency):
+    "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --headless=new \
+      --hide-scrollbars --force-device-scale-factor=1 --window-size=1200,630 \
+      --virtual-time-budget=8000 --screenshot=public/og-image.png "file://$PWD/design/og-image.html"
+-->
+<html>
+<head>
+<meta charset="utf-8" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600&family=Space+Grotesk:wght@600;700&display=block" rel="stylesheet" />
+<style>
+  :root { --paper:#F7F4EC; --ink:#171717; --lime:#D9F66F; --lavender:#C8B6FF; --coral:#FF9B85; --white:#fff; }
+  * { box-sizing: border-box; margin: 0; }
+  html, body { width: 1200px; height: 630px; overflow: hidden; }
+  body {
+    background: var(--paper);
+    background-image: linear-gradient(rgba(23,23,23,.06) 1px, transparent 1px), linear-gradient(90deg, rgba(23,23,23,.06) 1px, transparent 1px);
+    background-size: 40px 40px;
+    font-family: "Inter", sans-serif; color: var(--ink);
+    position: relative;
+  }
+  .frame {
+    position: absolute; left: 36px; top: 36px; width: 1112px; height: 542px;
+    background: var(--paper); border: 4px solid var(--ink); border-radius: 28px;
+    box-shadow: 14px 14px 0 0 var(--ink);
+    padding: 52px 60px; display: flex; flex-direction: column;
+  }
+  .top { display: flex; align-items: center; justify-content: space-between; }
+  .mark { display: flex; align-items: center; gap: 18px; }
+  .tile {
+    width: 72px; height: 72px; background: var(--lime); border: 4px solid var(--ink); border-radius: 14px;
+    box-shadow: 6px 6px 0 0 var(--ink); display: grid; place-items: center;
+  }
+  .label { font: 700 22px "Space Grotesk"; letter-spacing: .14em; text-transform: uppercase; }
+  .url {
+    font: 600 24px "Inter"; padding: 12px 20px; background: var(--white);
+    border: 3px solid var(--ink); border-radius: 12px; box-shadow: 5px 5px 0 0 var(--ink);
+  }
+  h1 { margin-top: 46px; font: 700 104px/0.95 "Space Grotesk"; letter-spacing: -0.035em; }
+  h2 { margin-top: 26px; font: 700 54px/1 "Space Grotesk"; letter-spacing: -0.025em; display: flex; align-items: center; gap: 16px; }
+  .hl {
+    display: inline-block; background: var(--lime); border: 4px solid var(--ink); border-radius: 14px;
+    padding: 2px 14px 8px; transform: rotate(-2deg); box-shadow: 6px 6px 0 0 var(--ink);
+  }
+  .tags { margin-top: auto; display: flex; gap: 14px; }
+  .tag { font: 600 26px "Inter"; padding: 10px 20px; border: 3px solid var(--ink); border-radius: 10px; }
+  .t1 { background: var(--lime); } .t2 { background: var(--lavender); } .t3 { background: var(--coral); } .t4 { background: var(--white); }
+  .deco { position: absolute; right: 60px; top: 190px; width: 220px; height: 220px; }
+  .deco div { position: absolute; border: 4px solid var(--ink); border-radius: 22px; }
+  .d1 { inset: 40px 0 0 40px; background: var(--coral); }
+  .d2 { inset: 0 40px 40px 0; background: var(--lavender); box-shadow: 8px 8px 0 0 var(--ink); }
+</style>
+</head>
+<body>
+  <div class="frame">
+    <div class="top">
+      <div class="mark">
+        <div class="tile">
+          <svg width="46" height="46" viewBox="5 7 19 15" aria-hidden="true"><g fill="#171717">
+            <rect x="6" y="8" width="8" height="3"/><rect x="8.5" y="8" width="3" height="13"/>
+            <rect x="16" y="8" width="7" height="3"/><rect x="16" y="8" width="3" height="8"/>
+            <rect x="16" y="13" width="7" height="3"/><rect x="20" y="13" width="3" height="8"/>
+            <rect x="16" y="18" width="7" height="3"/></g></svg>
+        </div>
+        <span class="label">Portfolio</span>
+      </div>
+      <span class="url">thihasoe1.github.io/my-portfolio</span>
+    </div>
+
+    <div class="deco" aria-hidden="true"><div class="d1"></div><div class="d2"></div></div>
+
+    <h1>Saw Thi Ha Soe</h1>
+    <h2>Senior <span class="hl">Mobile</span> Developer</h2>
+
+    <div class="tags">
+      <span class="tag t1">Flutter / Dart</span>
+      <span class="tag t2">Mobile Architecture</span>
+      <span class="tag t3">Firebase</span>
+      <span class="tag t4">Node.js</span>
+    </div>
+  </div>
+</body>
+</html>
