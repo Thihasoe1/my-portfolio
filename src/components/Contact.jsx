@@ -1,5 +1,13 @@
 import { useState } from "react";
-import { motion } from "framer-motion";
+import Button from "@/components/ui/Button";
+import Card from "@/components/ui/Card";
+import Container from "@/components/ui/Container";
+import SectionHeader from "@/components/ui/SectionHeader";
+
+// Phase C: visual restyle only. The Web3Forms form and its submit logic are
+// unchanged until Phase D replaces this section with direct email contact.
+const field =
+  "w-full px-4 py-3.5 bg-surface text-ink placeholder:text-ink-subtle border-3 border-ink rounded-brutal-sm shadow-brutal-sm focus-visible:shadow-brutal-none";
 
 const Contact = () => {
   const [result, setResult] = useState("");
@@ -39,100 +47,51 @@ const Contact = () => {
     setIsSubmitting(false);
   };
 
+  const succeeded = result.includes("Successfully");
+
   return (
-    <section id="contact" className="py-24 relative z-10">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="contact" aria-labelledby="contact-title" className="py-20 sm:py-28 bg-lime/40">
+      <Container size="md">
+        <SectionHeader
+          id="contact-title"
+          eyebrow="Contact"
+          tone="surface"
+          align="center"
+          title="Let's build something together."
+          description="Currently open for new opportunities. Whether you have a question or just want to say hi, I'll try my best to get back to you!"
+        />
 
-        <motion.div
-          className="text-center mb-16"
-          initial={{ opacity: 0, y: -20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.6 }}
-        >
-          <h2 className="text-sm font-bold tracking-widest text-brand-400 uppercase mb-3">
-            Reach Out
-          </h2>
-          <h3 className="text-3xl md:text-5xl font-bold text-white mb-6">
-            Let's build something together.
-          </h3>
-          <p className="text-slate-400 max-w-xl mx-auto">
-            Currently open for new opportunities. Whether you have a question or just want to say hi, I'll try my best to get back to you!
-          </p>
-        </motion.div>
+        <Card padding="lg" shadow="lg">
+          <form className="space-y-6" onSubmit={onSubmit}>
+            <input type="hidden" name="subject" value="New message from Portfolio!" />
 
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="relative group"
-        >
-          {/* Glowing background */}
-          <div className="absolute -inset-1 bg-gradient-to-r from-brand-600 to-accent-600 rounded-3xl blur opacity-25 group-hover:opacity-40 transition duration-500" />
-
-          <div className="relative glass-card rounded-3xl p-8 md:p-12 border border-slate-700/50">
-            <form className="space-y-8" onSubmit={onSubmit}>
-              {/* Optional: Add a subject to clearly identify the email */}
-              <input type="hidden" name="subject" value="New message from Portfolio!" />
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div className="space-y-2">
-                  <label htmlFor="name" className="text-sm font-medium text-slate-300 ml-1">Your Name</label>
-                  <input
-                    type="text"
-                    name="name"
-                    id="name"
-                    required
-                    className="w-full px-5 py-4 bg-slate-900/50 border border-slate-700/50 rounded-xl focus:ring-2 focus:ring-brand-500 focus:border-transparent outline-none text-white placeholder-slate-500 transition-all"
-                    placeholder="John Doe"
-                  />
-                </div>
-                <div className="space-y-2">
-                  <label htmlFor="email" className="text-sm font-medium text-slate-300 ml-1">Your Email</label>
-                  <input
-                    type="email"
-                    name="email"
-                    id="email"
-                    required
-                    className="w-full px-5 py-4 bg-slate-900/50 border border-slate-700/50 rounded-xl focus:ring-2 focus:ring-brand-500 focus:border-transparent outline-none text-white placeholder-slate-500 transition-all"
-                    placeholder="john@example.com"
-                  />
-                </div>
-              </div>
-
+            <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
               <div className="space-y-2">
-                <label htmlFor="message" className="text-sm font-medium text-slate-300 ml-1">Message</label>
-                <textarea
-                  rows="5"
-                  name="message"
-                  id="message"
-                  required
-                  className="w-full px-5 py-4 bg-slate-900/50 border border-slate-700/50 rounded-xl focus:ring-2 focus:ring-brand-500 focus:border-transparent outline-none text-white placeholder-slate-500 transition-all resize-none"
-                  placeholder="Hello, I'd like to talk about..."
-                ></textarea>
+                <label htmlFor="name" className="block font-display font-bold">Your name</label>
+                <input type="text" name="name" id="name" required autoComplete="name" className={field} placeholder="John Doe" />
               </div>
-
-              <div className="flex flex-col items-center pt-4">
-                <motion.button
-                  type="submit"
-                  disabled={isSubmitting}
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                  className="w-full md:w-auto px-10 py-4 mb-4 bg-gradient-to-r from-brand-600 to-accent-600 text-white rounded-xl font-semibold shadow-lg shadow-brand-500/25 hover:shadow-brand-500/40 transition-all disabled:opacity-70"
-                >
-                  {isSubmitting ? "Sending..." : "Send Message"}
-                </motion.button>
-
-                {/* Result Message */}
-                <span className={`text-sm font-medium ${result.includes("Successfully") ? "text-green-400" : "text-brand-300"}`}>
-                  {result}
-                </span>
+              <div className="space-y-2">
+                <label htmlFor="email" className="block font-display font-bold">Your email</label>
+                <input type="email" name="email" id="email" required autoComplete="email" className={field} placeholder="john@example.com" />
               </div>
-            </form>
-          </div>
-        </motion.div>
-      </div>
+            </div>
+
+            <div className="space-y-2">
+              <label htmlFor="message" className="block font-display font-bold">Message</label>
+              <textarea rows="5" name="message" id="message" required className={`${field} resize-y`} placeholder="Hello, I'd like to talk about..." />
+            </div>
+
+            <div className="flex flex-col items-center gap-4 pt-2 sm:flex-row sm:justify-between">
+              <p role="status" aria-live="polite" className={`text-sm font-semibold ${succeeded ? "text-ink" : "text-ink-muted"}`}>
+                {result}
+              </p>
+              <Button type="submit" size="lg" disabled={isSubmitting} className="w-full sm:w-auto">
+                {isSubmitting ? "Sending..." : "Send Message"}
+              </Button>
+            </div>
+          </form>
+        </Card>
+      </Container>
     </section>
   );
 };

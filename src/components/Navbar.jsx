@@ -1,133 +1,146 @@
-import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useEffect, useId, useRef, useState } from "react";
 import { Menu, X } from "lucide-react";
+import Container from "@/components/ui/Container";
+import Icon from "@/components/ui/Icon";
+import { cn } from "@/lib/cn";
+import { navLinks, profile } from "@/data/profile";
 
-const navLinks = [
-  { name: "Home", href: "#home" },
-  { name: "Experience", href: "#about" },
-  { name: "Projects", href: "#projects" },
-  { name: "Skills", href: "#skills" },
-  { name: "Contact", href: "#contact" },
-];
-
-const Navbar = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-  const [activeSection, setActiveSection] = useState("home");
+/** Track which section is in the reading zone, without a scroll listener. */
+function useActiveSection(ids) {
+  const [active, setActive] = useState("");
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
+    const sections = ids.map((id) => document.getElementById(id)).filter(Boolean);
+    if (!sections.length || !("IntersectionObserver" in window)) return;
 
-      // determine active section
-      const sections = navLinks.map(link => link.href.substring(1));
-      let current = "";
-      for (const section of sections) {
-        const element = document.getElementById(section);
-        if (element) {
-          const rect = element.getBoundingClientRect();
-          if (rect.top <= 100 && rect.bottom >= 100) {
-            current = section;
-            break;
-          }
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) setActive(entry.target.id);
         }
-      }
-      if (current) setActiveSection(current);
-    };
+      },
+      // A thin band just below the sticky header counts as "current".
+      { rootMargin: "-30% 0px -65% 0px" }
+    );
+    sections.forEach((section) => observer.observe(section));
+    return () => observer.disconnect();
+  }, [ids]);
 
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+  return active;
+}
+
+const ids = navLinks.map((link) => link.id);
+
+const linkBase =
+  "relative inline-flex items-center min-h-11 px-3 font-display font-bold text-ink rounded-brutal-sm border-2 transition-colors duration-150";
+
+export default function Navbar() {
+  const [open, setOpen] = useState(false);
+  const active = useActiveSection(ids);
+  const menuId = useId();
+  const toggleRef = useRef(null);
+
+  // Escape closes the menu and returns focus to the toggle.
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (event) => {
+      if (event.key === "Escape") {
+        setOpen(false);
+        toggleRef.current?.focus();
+      }
+    };
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [open]);
+
+  // Close the mobile menu if the viewport grows to desktop size.
+  useEffect(() => {
+    const mq = window.matchMedia("(min-width: 768px)");
+    const onChange = (event) => event.matches && setOpen(false);
+    mq.addEventListener("change", onChange);
+    return () => mq.removeEventListener("change", onChange);
   }, []);
 
   return (
-    <motion.nav
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.5, ease: "easeOut" }}
-      className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-        scrolled ? "py-4" : "py-6"
-      }`}
-    >
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className={`glass-nav rounded-2xl px-6 py-3 flex justify-between items-center transition-all duration-300 shadow-xl ${scrolled ? 'bg-slate-950/80 backdrop-blur-md' : 'bg-slate-900/50 backdrop-blur-sm border-transparent'}`}>
-          {/* Logo */}
-          <div className="flex items-center">
-            <a href="#home" className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-brand-300 to-accent-400">
-              Saw Thi Ha Soe
-            </a>
-          </div>
-
-          {/* Desktop Menu */}
-          <div className="hidden md:flex items-center space-x-1">
-            {navLinks.map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                onClick={() => setActiveSection(link.href.substring(1))}
-                className={`relative px-4 py-2 rounded-full text-sm font-medium transition-colors duration-300 ${
-                  activeSection === link.href.substring(1)
-                    ? "text-white"
-                    : "text-slate-400 hover:text-white"
-                }`}
-              >
-                {activeSection === link.href.substring(1) && (
-                  <motion.div
-                    layoutId="navbar-indicator"
-                    className="absolute inset-0 bg-brand-500/20 rounded-full border border-brand-500/30"
-                    transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                  />
-                )}
-                <span className="relative z-10">{link.name}</span>
-              </a>
-            ))}
-          </div>
-
-          {/* Mobile Menu Button */}
-          <div className="md:hidden flex items-center">
-            <button
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="text-slate-300 hover:text-white focus:outline-none p-2 rounded-full bg-slate-800/50 border border-slate-700/50"
-            >
-              {isMenuOpen ? <X size={20} /> : <Menu size={20} />}
-            </button>
-          </div>
-        </div>
-      </div>
-
-      {/* Mobile Menu Dropdown */}
-      <AnimatePresence>
-        {isMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95, y: -20 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.95, y: -20 }}
-            transition={{ duration: 0.2 }}
-            className="md:hidden absolute top-full left-4 right-4 mt-2"
+    <header className="sticky top-0 z-50 bg-paper border-b-3 border-ink">
+      <Container as="nav" aria-label="Primary" className="flex items-center justify-between gap-4 h-[4.5rem]">
+        <a
+          href="#top"
+          className="group inline-flex items-center gap-3 rounded-brutal-sm"
+          onClick={() => setOpen(false)}
+        >
+          <span
+            aria-hidden="true"
+            className="grid place-items-center size-10 bg-lime border-3 border-ink rounded-brutal-sm shadow-brutal-sm font-display font-bold text-sm transition-transform duration-150 group-hover:-rotate-6"
           >
-            <div className="glass-panel rounded-2xl py-4 px-4 flex flex-col space-y-2 shadow-2xl border border-slate-700/50 text-center">
-              {navLinks.map((link) => (
-                <a
-                  key={link.name}
-                  href={link.href}
-                  className={`py-3 rounded-xl transition-colors ${
-                    activeSection === link.href.substring(1)
-                      ? "bg-brand-500/20 text-brand-300 border border-brand-500/30"
-                      : "text-slate-300 hover:bg-slate-800/50"
-                  }`}
-                  onClick={() => {
-                    setIsMenuOpen(false);
-                    setActiveSection(link.href.substring(1));
-                  }}
-                >
-                  {link.name}
-                </a>
-              ))}
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </motion.nav>
-  );
-};
+            TS
+          </span>
+          <span className="font-display font-bold text-lg leading-none">
+            {profile.name}
+            <span className="sr-only">, {profile.title} — back to top</span>
+          </span>
+        </a>
 
-export default Navbar;
+        {/* Desktop */}
+        <ul className="hidden md:flex items-center gap-1">
+          {navLinks.map((link) => {
+            const isActive = active === link.id;
+            return (
+              <li key={link.id}>
+                <a
+                  href={`#${link.id}`}
+                  aria-current={isActive ? "true" : undefined}
+                  className={cn(
+                    linkBase,
+                    isActive
+                      ? "bg-lime border-ink"
+                      : "border-transparent hover:border-ink hover:bg-surface"
+                  )}
+                >
+                  {link.label}
+                </a>
+              </li>
+            );
+          })}
+        </ul>
+
+        {/* Mobile toggle */}
+        <button
+          ref={toggleRef}
+          type="button"
+          className="md:hidden grid place-items-center size-11 bg-surface border-3 border-ink rounded-brutal-sm shadow-brutal-sm active:translate-x-[3px] active:translate-y-[3px] active:shadow-brutal-none"
+          aria-expanded={open}
+          aria-controls={menuId}
+          aria-label={open ? "Close menu" : "Open menu"}
+          onClick={() => setOpen((value) => !value)}
+        >
+          <Icon icon={open ? X : Menu} size={22} strokeWidth={2.5} />
+        </button>
+      </Container>
+
+      {/* Mobile menu: removed from the tab order entirely when closed. */}
+      <div id={menuId} hidden={!open} className="md:hidden border-t-3 border-ink bg-paper">
+        <Container as="ul" className="flex flex-col gap-2 py-4">
+          {navLinks.map((link) => {
+            const isActive = active === link.id;
+            return (
+              <li key={link.id}>
+                <a
+                  href={`#${link.id}`}
+                  aria-current={isActive ? "true" : undefined}
+                  onClick={() => setOpen(false)}
+                  className={cn(
+                    "flex items-center min-h-12 px-4 font-display font-bold text-lg border-3 border-ink rounded-brutal-sm",
+                    isActive ? "bg-lime shadow-brutal-sm" : "bg-surface"
+                  )}
+                >
+                  {link.label}
+                </a>
+              </li>
+            );
+          })}
+        </Container>
+      </div>
+    </header>
+  );
+}

@@ -1,5 +1,9 @@
-import { motion } from "framer-motion";
 import { FaApple, FaGooglePlay } from "react-icons/fa";
+import Button from "@/components/ui/Button";
+import Card from "@/components/ui/Card";
+import Container from "@/components/ui/Container";
+import SectionHeader from "@/components/ui/SectionHeader";
+import Tag from "@/components/ui/Tag";
 import wasolearn from "@/assets/waso_learn.webp";
 import sfulearn from "@/assets/strategy_first.png";
 import sfux from "@/assets/sfux.png";
@@ -52,139 +56,76 @@ const projects = [
   }
 ];
 
+// Phase C: visual restyle only. Project content and links are unchanged;
+// data moves to src/data/projects.js in Phase D.
+const frameTones = ["bg-lime", "bg-lavender", "bg-coral", "bg-surface"];
+
 const Projects = () => {
-  const container = {
-    hidden: { opacity: 0 },
-    show: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.15,
-        delayChildren: 0.2,
-      },
-    },
-  };
-
-  const item = {
-    hidden: {
-      opacity: 0,
-      y: 40,
-    },
-    show: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.7,
-        ease: [0.21, 0.47, 0.32, 0.98],
-      },
-    },
-  };
-
   return (
-    <section id="projects" className="py-24 relative z-10">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
-        <motion.div
-          className="text-center mb-20"
-          initial={{ opacity: 0, y: -20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.6 }}
-        >
-          <h2 className="text-sm font-bold tracking-widest text-brand-400 uppercase mb-3">
-            Portfolio
-          </h2>
-          <h3 className="text-3xl md:text-5xl font-bold text-white">
-            Featured Projects
-          </h3>
-        </motion.div>
+    <section id="projects" aria-labelledby="projects-title" className="py-20 sm:py-28 border-b-3 border-ink bg-surface">
+      <Container>
+        <SectionHeader
+          id="projects-title"
+          eyebrow="Projects"
+          tone="coral"
+          title="Featured projects"
+          description="Selected Flutter applications published on the App Store and Google Play."
+        />
 
-        <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12"
-          variants={container}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, margin: "-100px" }}
-        >
-          {projects.map((project) => (
-            <motion.div
+        <ul className="grid gap-8 md:grid-cols-2 lg:gap-10">
+          {projects.map((project, index) => (
+            <Card
+              as="li"
               key={project.id}
-              variants={item}
-              className="group relative h-full flex flex-col"
+              padding="none"
+              interactive
+              className="flex flex-col overflow-hidden"
             >
-              {/* Dynamic glowing shadow behind card */}
-              <div className={`absolute -inset-0.5 bg-gradient-to-br ${project.color} rounded-[2rem] blur opacity-20 group-hover:opacity-40 transition duration-500`} />
-              
-              <div className="relative h-full flex flex-col glass-card rounded-3xl overflow-hidden border border-slate-700/50 hover:border-slate-500/50 transition-colors duration-500 bg-slate-900/80">
-                
-                {/* Image Container with inner shadow */}
-                <div className="relative h-64 overflow-hidden bg-slate-950 p-6 flex items-center justify-center">
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900 to-transparent z-10 opacity-60" />
-                  <motion.div 
-                    className="relative z-0 w-full h-full rounded-xl overflow-hidden shadow-2xl"
-                    whileHover={{ scale: 1.05 }}
-                    transition={{ duration: 0.5 }}
-                  >
+              <article aria-labelledby={`project-${project.id}-title`} className="flex flex-1 flex-col">
+                <div className={`p-4 sm:p-5 border-b-3 border-ink ${frameTones[index % frameTones.length]}`}>
+                  <div className="overflow-hidden border-3 border-ink rounded-brutal bg-surface">
                     <img
                       src={project.image}
-                      alt={project.title}
-                      className="w-full h-full object-cover rounded-xl"
+                      alt={`${project.title} app screenshots`}
+                      loading="lazy"
+                      decoding="async"
+                      className="block w-full aspect-[16/10] object-cover object-top"
                     />
-                  </motion.div>
+                  </div>
                 </div>
 
-                {/* Content */}
-                <div className="p-8 flex-1 flex flex-col">
-                  <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-brand-300 transition-colors">
+                <div className="flex flex-1 flex-col p-6 sm:p-7">
+                  <h3 id={`project-${project.id}-title`} className="font-display text-h3 font-bold">
                     {project.title}
                   </h3>
-                  
-                  <p className="text-slate-400 mb-6 flex-1 line-clamp-3 leading-relaxed">
-                    {project.description}
-                  </p>
+                  <p className="mt-3 flex-1 leading-relaxed text-ink-muted">{project.description}</p>
 
-                  <div className="flex flex-wrap gap-2 mb-8 mt-auto">
-                    {project.tech.map((tech, idx) => (
-                      <span
-                        key={idx}
-                        className="text-xs font-mono px-3 py-1 rounded-full bg-slate-800 text-slate-300 border border-slate-700"
-                      >
+                  <ul aria-label="Technology stack" className="mt-5 flex flex-wrap gap-2">
+                    {project.tech.map((tech) => (
+                      <Tag as="li" key={tech} size="sm">
                         {tech}
-                      </span>
+                      </Tag>
                     ))}
-                  </div>
+                  </ul>
 
-                  {/* Buttons */}
-                  <div className="flex flex-col sm:flex-row gap-3 pt-6 border-t border-slate-800">
+                  <div className="mt-6 pt-6 border-t-2 border-ink flex flex-col gap-3 sm:flex-row">
                     {project.iosLink && (
-                      <a
-                        href={project.iosLink}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex-1 flex items-center justify-center gap-2 py-3 px-4 rounded-xl font-medium text-sm bg-white text-slate-900 hover:bg-slate-200 transition-colors"
-                      >
-                        <FaApple size={18} />
-                        App Store
-                      </a>
+                      <Button href={project.iosLink} external variant="secondary" leftIcon={FaApple} className="flex-1">
+                        App Store<span className="sr-only">: {project.title}</span>
+                      </Button>
                     )}
-                    
                     {project.androidLink && (
-                      <a
-                        href={project.androidLink}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex-1 flex items-center justify-center gap-2 py-3 px-4 rounded-xl font-medium text-sm bg-gradient-to-r from-emerald-500 to-emerald-600 text-white hover:from-emerald-400 hover:to-emerald-500 transition-colors"
-                      >
-                        <FaGooglePlay size={16} />
-                        Google Play
-                      </a>
+                      <Button href={project.androidLink} external variant="primary" leftIcon={FaGooglePlay} className="flex-1">
+                        Google Play<span className="sr-only">: {project.title}</span>
+                      </Button>
                     )}
                   </div>
                 </div>
-              </div>
-            </motion.div>
+              </article>
+            </Card>
           ))}
-        </motion.div>
-      </div>
+        </ul>
+      </Container>
     </section>
   );
 };

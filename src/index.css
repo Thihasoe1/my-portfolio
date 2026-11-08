@@ -53,18 +53,6 @@
 
   /* Motion */
   --ease-brutal: cubic-bezier(0.2, 0.8, 0.2, 1);
-
-  /* --- Legacy dark-theme tokens: used by current sections until Phase C --- */
-  --color-brand-100: #e0e7ff;
-  --color-brand-300: #a5b4fc;
-  --color-brand-500: #6366f1;
-  --color-brand-700: #4338ca;
-  --color-brand-900: #312e81;
-  --color-accent-400: #2dd4bf;
-  --color-accent-500: #14b8a6;
-
-  --animate-float: float 6s ease-in-out infinite;
-  --animate-blob: blob 7s infinite;
 }
 
 /* Non-utility design variables */
@@ -73,10 +61,10 @@
   --border-thick: 3px;
   --focus-ring-color: var(--color-ink);
   --focus-ring-halo: var(--color-lime);
-  --header-offset: 6rem; /* fixed navbar height for anchor scrolling */
+  --header-offset: 5.5rem; /* sticky navbar height + breathing room for anchors */
 }
 
-/* Temporary: current sections still render on a dark surface. */
+/* Dark (ink) surfaces, e.g. the footer: swap ring colours so focus stays visible. */
 [data-surface="dark"] {
   --focus-ring-color: var(--color-lime);
   --focus-ring-halo: var(--color-ink);
@@ -127,13 +115,6 @@
   }
 }
 
-/* Legacy `focus:outline-none` utilities must never hide the keyboard ring.
-   Unlayered on purpose so it outranks the utilities layer. */
-.focus\:outline-none:focus-visible {
-  outline: var(--border-thick) solid var(--focus-ring-color);
-  outline-offset: 3px;
-}
-
 /* --------------------------------------------------------------------------
    Motion: smooth scroll only when wanted; neutralise CSS animation otherwise.
    Framer Motion is handled by <MotionConfig reducedMotion="user"> in App.jsx.
@@ -155,96 +136,16 @@
   }
 }
 
-@keyframes float {
-  0% {
-    transform: translateY(0px);
+@layer base {
+  body {
+    font-family: var(--font-sans);
+    background-color: var(--color-paper);
+    color: var(--color-ink);
+    overflow-x: clip;
   }
-  50% {
-    transform: translateY(-20px);
-  }
-  100% {
-    transform: translateY(0px);
-  }
-}
 
-@keyframes blob {
-  0% {
-    transform: translate(0px, 0px) scale(1);
+  ::selection {
+    background-color: var(--color-lime);
+    color: var(--color-ink);
   }
-  33% {
-    transform: translate(30px, -50px) scale(1.1);
-  }
-  66% {
-    transform: translate(-20px, 20px) scale(0.9);
-  }
-  100% {
-    transform: translate(0px, 0px) scale(1);
-  }
-}
-
-body {
-  font-family: var(--font-sans);
-  background-color: #020617; /* slate-950 */
-  color: #f8fafc; /* slate-50 */
-  overflow-x: hidden;
-}
-
-.scroll-smooth {
-  scroll-behavior: smooth;
-}
-
-.typewriter {
-  overflow: hidden;
-  border-right: 0.16em solid #6366f1; /* brand-500 */
-  white-space: nowrap;
-  width: 0;
-  animation: typing 3s steps(30, end) forwards,
-    blink-caret 0.75s step-end infinite;
-}
-
-@keyframes typing {
-  from {
-    width: 0;
-  }
-  to {
-    width: 100%;
-  }
-}
-
-@keyframes blink-caret {
-  from,
-  to {
-    border-color: transparent;
-  }
-  50% {
-    border-color: #6366f1;
-  }
-}
-
-/* Glassmorphism utility classes */
-.glass-panel {
-  background: rgba(15, 23, 42, 0.4); /* slate-900 / 40% */
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-.glass-nav {
-  background: rgba(2, 6, 23, 0.7); /* slate-950 / 70% */
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-.glass-card {
-  background: rgba(30, 41, 59, 0.4); /* slate-800 / 40% */
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-}
-
-.glass-card:hover {
-  background: rgba(30, 41, 59, 0.6);
-  border-color: rgba(99, 102, 241, 0.3); /* brand-500 w/ opacity */
 }
