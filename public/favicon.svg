@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="TS">
+  <!-- Neo-Brutalist "TS" mark: lime tile, ink outline, hard offset shadow.
+       Letters are drawn as rectangles so they render identically without fonts. -->
+  <rect x="5" y="5" width="25" height="25" rx="4" fill="#171717"/>
+  <rect x="2.25" y="2.25" width="24.5" height="24.5" rx="3.5" fill="#D9F66F" stroke="#171717" stroke-width="2.5"/>
+  <g fill="#171717">
+    <!-- T -->
+    <rect x="6" y="8" width="8" height="3"/>
+    <rect x="8.5" y="8" width="3" height="13"/>
+    <!-- S -->
+    <rect x="16" y="8" width="7" height="3"/>
+    <rect x="16" y="8" width="3" height="8"/>
+    <rect x="16" y="13" width="7" height="3"/>
+    <rect x="20" y="13" width="3" height="8"/>
+    <rect x="16" y="18" width="7" height="3"/>
+  </g>
+</svg>

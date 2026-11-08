@@ -85,6 +85,8 @@ function ProjectCard({ project, index }) {
           <div className="overflow-hidden border-3 border-ink rounded-brutal bg-surface">
             <img
               src={project.image.src}
+              srcSet={project.image.srcSet}
+              sizes="(min-width: 1152px) 540px, (min-width: 768px) calc(50vw - 4rem), calc(100vw - 4.5rem)"
               width={project.image.width}
               height={project.image.height}
               alt={`${project.name} app screenshots`}

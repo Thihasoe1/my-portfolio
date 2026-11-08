@@ -1,5 +1,4 @@
 import { lazy, Suspense } from "react";
-import { MotionConfig } from "framer-motion";
 import SkipLink from "./components/SkipLink";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
@@ -22,9 +21,8 @@ const showDesignSystem =
 
 function App() {
   return (
-    // reducedMotion="user" disables Framer transform/layout animations when the
-    // OS "reduce motion" setting is on; CSS animations are handled in index.css.
-    <MotionConfig reducedMotion="user">
+    // Reduced motion is handled globally in index.css (prefers-reduced-motion).
+    <>
       {showDesignSystem && DesignSystemPreview ? (
         <Suspense fallback={null}>
           <DesignSystemPreview />
@@ -45,7 +43,7 @@ function App() {
           <Footer />
         </>
       )}
-    </MotionConfig>
+    </>
   );
 }
 
